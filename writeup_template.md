@@ -45,19 +45,21 @@ The model.py file contains the code for training and saving the convolution neur
 #### 1. An appropriate model architecture has been employed
 
 I tried to implemente following CNN model from Nvidia (model.py lines 52-78):
-| Layer            | Info          | 
-|:----------------:|:-------------:| 
+
+| Layer            | Info          													 | 
+|:----------------:|:---------------------------------------------------------------:| 
 | Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
 | Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
 | Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     | 
-| MaxPooling	   | 	size=(2,2)				| 
-| Flatten    	   |	  -   | 
-| Dense	    	   |	Neurons=100     | 
-| Dense	    	   |	Neurons=50     | 
-| Dense	    	   |	Neurons=10     | 
-| Dense	    	   |	Neurons=1     | 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 | 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 | 
+| MaxPooling	   | 	size=(2,2)													 | 
+| Flatten    	   |	  -   														 | 
+| Dense	    	   |	Neurons=100     											 | 
+| Dense	    	   |	Neurons=50     												 | 
+| Dense	    	   |	Neurons=10     												 | 
+| Dense	    	   |	Neurons=1     												 |	 
+
 #### 2. Attempts to reduce overfitting in the model
 a. The model was trained and validated on different data sets to ensure that the model was not overfitting. 
    
