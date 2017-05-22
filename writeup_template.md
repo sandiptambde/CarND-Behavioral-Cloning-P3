@@ -128,35 +128,64 @@ Please check video.mp4 for the recorded video.
 #### 2. Final Model Architecture
 
 The final model architecture (model.py lines 52-78) consisted of a convolution neural network with the following layers and parameters
-| Layer            | Info          | 
-|:----------------:|:-------------:| 
+
+| Layer            | Info          													 | 
+|:----------------:|:---------------------------------------------------------------:| 
 | Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
 | Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
 | Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     | 
-| MaxPooling	   | 	size=(2,2)				| 
-| Flatten    	   |	  -   | 
-| Dense	    	   |	Neurons=100     | 
-| Dense	    	   |	Neurons=50     | 
-| Dense	    	   |	Neurons=10     | 
-| Dense	    	   |	Neurons=1     | 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 | 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 | 
+| MaxPooling	   | 	size=(2,2)													 | 
+| Flatten    	   |	  -   														 | 
+| Dense	    	   |	Neurons=100     											 | 
+| Dense	    	   |	Neurons=50     												 | 
+| Dense	    	   |	Neurons=10     												 | 
+| Dense	    	   |	Neurons=1     												 |	 
 
 
 #### 3. Creation of the Training Set & Training Process
 My dataset is created using combination of center lane driving, recovering from the left/right sides of the road and reverse track driving.
+I first recorded two laps on track one using center lane driving and one lap by reverse track driving:
+Here is example of an center lane driving image:
+
+<img src="./examples/center_2016_12_01_13_46_38_947.jpg" alt="Center Image" style="width: 300px;"/>
 
 Training process involved:
 
 a. Data Augmentation:
 
-- I created dataset using all three camera images i.e. centre, left, right and added variance for let & right images.
+- I created dataset using all three camera images i.e. centre, left, right and added variance for left & right images.
+Here are example of an image using from all three cameras:
+
+Left camera:
+
+<img src="./examples/left_2016_12_01_13_46_38_947.jpg" alt="Center Image" style="width: 300px;"/>
+
+Center camera:
+
+<img src="./examples/center_2016_12_01_13_46_38_947.jpg" alt="Center Image" style="width: 300px;"/>
+
+Right camera
+
+<img src="./examples/right_2016_12_01_13_46_38_947.jpg" alt="Center Image" style="width: 300px;"/>
 
 b. PreProcessing:
 
 - I tried normalizing & cropping the image
+
+```sh
+54  model.add(Lambda(lambda x:x/255.0 - 0.5,input_shape=(160,320,3)))   # image normalization
+55  model.add(Cropping2D(cropping=((70,20),(0,0))))                     # cropping the image
+```
+
 - Then devided the dataset into training & validation dataset
 
 c. Training the network:
 
-- Then I trained the network on training dataset for 10 epoch. 
+- Then I trained the network on training dataset for 10 epoch using 'Adam' optimizer. 
+
+```sh
+80 model.compile(loss='mse',optimizer='adam')
+81 model.fit(x_train,y_train,validation_split=0.2,nb_epoch=10,shuffle=True)  
+```
