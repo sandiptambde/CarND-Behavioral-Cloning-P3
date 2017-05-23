@@ -44,13 +44,13 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-I tried to implemente following CNN model from Nvidia (model.py lines 52-78):
+I tried to implemente following CNN model from Nvidia (model.py lines 60-85):
 
 | Layer            | Info          													 		| 
 |:----------------:|:----------------------------------------------------------------------:| 
 | Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      		| 
 | Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2),dropout=0.25| 
-| Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2),dropout=0.25| 
+| Convolution2D    | Filters=48, Kernel=(5,5),activation='relu',subsample=(2,2),dropout=0.25| 
 | Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 		| 
 | Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 		| 
 | MaxPooling	   | 	size=(2,2)													 		| 
@@ -92,30 +92,31 @@ For details about how I created the training data, see the next section.
 a. Model:
 
 I wanted to see how well estabished CNN model works. So, I choose NVDIA CNN model to train the netwrok.
-But with default model I was not getting proper results for my training set. So I did small modifications in the network after which, I was able to drive the car.
-
-```sh
-62 model.add(Convolution2D(48,3,3,subsample=(2,2),activation='relu'))   # reduced the kernel size to save more info
-68 model.add(MaxPooling2D())	      #added maxpooling layer after CNN layers	
-```
+Architecture is defined in Final Model Architecture section below
 
 b. dataset:
 
 I choose to use all three camera images i.e. centre, left, right and added correction as follows:
 
 ```sh
-17  correction = 0.2
-24  centre_img_np=cv2.imread(centre_img)                # add centre camera image
+18  correction = 0.2
+25  image = Image.open(centre_img)
+26  centre_img_np = np.array(image)						# add center image
+    #centre_img_np=cv2.imread(centre_img)
     image_list.append(centre_img_np)
     steering_angle_list.append(eval(steering_angle))
 
-    left_img_np=cv2.imread(left_img.strip(' '))         # add left camera image
+    image = Image.open(left_img.strip(' '))
+    left_img_np = np.array(image)						# add left image
+    #left_img_np=cv2.imread(left_img.strip(' '))
     image_list.append(left_img_np)
-    steering_angle_list.append(eval(steering_angle)+correction)
+    steering_angle_list.append(eval(steering_angle)+0.2)
 
-    right_img_np=cv2.imread(right_img.strip(' '))       # add right camera image
+    image = Image.open(right_img.strip(' '))
+    right_img_np = np.array(image)						# add right image
+    #right_img_np=cv2.imread(right_img.strip(' '))		
     image_list.append(right_img_np)
-34  steering_angle_list.append(eval(steering_angle)-correction)    
+41    steering_angle_list.append(eval(steering_angle)-0.2)   
 ```
 c. Preprocessing:
 
@@ -130,13 +131,13 @@ Please check video.mp4 for the recorded video.
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 52-78) consisted of a convolution neural network with the following layers and parameters
+The final model architecture (model.py lines 60-85) consisted of a convolution neural network with the following layers and parameters
 
 | Layer            | Info          													 		| 
 |:----------------:|:----------------------------------------------------------------------:| 
 | Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      		| 
 | Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2),dropout=0.25| 
-| Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2),dropout=0.25| 
+| Convolution2D    | Filters=48, Kernel=(5,5),activation='relu',subsample=(2,2),dropout=0.25| 
 | Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 		| 
 | Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 		| 
 | MaxPooling	   | 	size=(2,2)													 		| 
