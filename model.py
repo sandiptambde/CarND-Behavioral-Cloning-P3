@@ -21,17 +21,23 @@ for line in logfile:
     left_img = line[1]
     right_img = line[2]
 
-    centre_img_np=cv2.imread(centre_img)                # add centre camera image
+    image = Image.open(centre_img)
+    centre_img_np = np.array(image)						# add center image
+    #centre_img_np=cv2.imread(centre_img)
     image_list.append(centre_img_np)
     steering_angle_list.append(eval(steering_angle))
 
-    left_img_np=cv2.imread(left_img.strip(' '))         # add left camera image
+    image = Image.open(left_img.strip(' '))
+    left_img_np = np.array(image)						# add left image
+    #left_img_np=cv2.imread(left_img.strip(' '))
     image_list.append(left_img_np)
-    steering_angle_list.append(eval(steering_angle)+correction)
+    steering_angle_list.append(eval(steering_angle)+0.2)
 
-    right_img_np=cv2.imread(right_img.strip(' '))       # add right camera image
+    image = Image.open(right_img.strip(' '))
+    right_img_np = np.array(image)						# add right image
+    #right_img_np=cv2.imread(right_img.strip(' '))		
     image_list.append(right_img_np)
-    steering_angle_list.append(eval(steering_angle)-correction)    
+    steering_angle_list.append(eval(steering_angle)-0.2)
 
 # Data shuffling
 list1_shuf = []
@@ -59,16 +65,16 @@ model.add(Convolution2D(24,5,5,subsample=(2,2),activation='relu'))
 #model.add(Dropout(0.25))
 
 model.add(Convolution2D(36,5,5,subsample=(2,2),activation='relu'))
-#model.add(Dropout(0.25))
+model.add(Dropout(0.25))
 
-model.add(Convolution2D(48,3,3,subsample=(2,2),activation='relu'))
-#model.add(Dropout(0.25))
+model.add(Convolution2D(48,5,5,subsample=(2,2),activation='relu'))
+model.add(Dropout(0.25))
 
 model.add(Convolution2D(64,3,3,activation='relu'))
 model.add(Convolution2D(64,3,3,activation='relu'))
 
 model.add(MaxPooling2D())
-#model.add(Dropout(0.25))
+model.add(Dropout(0.25))
 
 model.add(Flatten())
 

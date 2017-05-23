@@ -46,19 +46,20 @@ The model.py file contains the code for training and saving the convolution neur
 
 I tried to implemente following CNN model from Nvidia (model.py lines 52-78):
 
-| Layer            | Info          													 | 
-|:----------------:|:---------------------------------------------------------------:| 
-| Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 | 
-| MaxPooling	   | 	size=(2,2)													 | 
-| Flatten    	   |	  -   														 | 
-| Dense	    	   |	Neurons=100     											 | 
-| Dense	    	   |	Neurons=50     												 | 
-| Dense	    	   |	Neurons=10     												 | 
-| Dense	    	   |	Neurons=1     												 |	 
+| Layer            | Info          													 		| 
+|:----------------:|:----------------------------------------------------------------------:| 
+| Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      		| 
+| Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2),dropout=0.25| 
+| Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2),dropout=0.25| 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 		| 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 		| 
+| MaxPooling	   | 	size=(2,2)													 		| 
+| Dropout          |    parameter=0.25												 		|
+| Flatten    	   |	  -   														 		| 
+| Dense	    	   |	Neurons=100     											 		| 
+| Dense	    	   |	Neurons=50     												 		| 
+| Dense	    	   |	Neurons=10     												 		| 
+| Dense	    	   |	Neurons=1     												 		|	 
 
 #### 2. Attempts to reduce overfitting in the model
 a. The model was trained and validated on different data sets to ensure that the model was not overfitting. 
@@ -71,7 +72,7 @@ b. The model was tested by running it through the simulator and ensuring that th
 
 c. Reshuffling of the dataset
 
-I also tried adding dropout layers in order to reduce overfitting but generated model didn't worked well. 
+d.  Also added dropout layers in colnvolution layers in order to reduce overfitting  
 
 #### 3. Model parameter tuning
 
@@ -131,19 +132,20 @@ Please check video.mp4 for the recorded video.
 
 The final model architecture (model.py lines 52-78) consisted of a convolution neural network with the following layers and parameters
 
-| Layer            | Info          													 | 
-|:----------------:|:---------------------------------------------------------------:| 
-| Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2)      | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 | 
-| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 | 
-| MaxPooling	   | 	size=(2,2)													 | 
-| Flatten    	   |	  -   														 | 
-| Dense	    	   |	Neurons=100     											 | 
-| Dense	    	   |	Neurons=50     												 | 
-| Dense	    	   |	Neurons=10     												 | 
-| Dense	    	   |	Neurons=1     												 |	 
+| Layer            | Info          													 		| 
+|:----------------:|:----------------------------------------------------------------------:| 
+| Convolution2D    | Filters=24, Kernel=(5,5),activation='relu',subsample=(2,2)      		| 
+| Convolution2D    | Filters=36, Kernel=(5,5),activation='relu',subsample=(2,2),dropout=0.25| 
+| Convolution2D    | Filters=48, Kernel=(3,3),activation='relu',subsample=(2,2),dropout=0.25| 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'      				 		| 
+| Convolution2D    | Filters=64, Kernel=(3,3),activation='relu'     				 		| 
+| MaxPooling	   | 	size=(2,2)													 		| 
+| Dropout          |    parameter=0.25												 		|
+| Flatten    	   |	  -   														 		| 
+| Dense	    	   |	Neurons=100     											 		| 
+| Dense	    	   |	Neurons=50     												 		| 
+| Dense	    	   |	Neurons=10     												 		| 
+| Dense	    	   |	Neurons=1     												 		|	 
 
 
 #### 3. Creation of the Training Set & Training Process
