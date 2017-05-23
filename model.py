@@ -6,6 +6,7 @@ from keras.layers import Flatten, Dense,Cropping2D,Lambda,Activation,Dropout
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 from random import shuffle
+from PIL import Image
 
 path="/home/stambde/Desktop/datset/dataset/"    # dataset path
 logfile_obj = open('driving_log.csv')

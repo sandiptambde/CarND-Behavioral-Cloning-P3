@@ -121,9 +121,8 @@ I choose to use all three camera images i.e. centre, left, right and added corre
 c. Preprocessing:
 
 As mentioned in the classroom, I used below two ways for preprocessing
-```sh
-54  model.add(Lambda(lambda x:x/255.0 - 0.5,input_shape=(160,320,3)))   # image normalization
-55  model.add(Cropping2D(cropping=((70,20),(0,0))))                     # cropping the image
+61  model.add(Lambda(lambda x:x/255.0 - 0.5,input_shape=(160,320,3)))   # image normalization
+62  model.add(Cropping2D(cropping=((70,20),(0,0))))                     # cropping the image
 ```
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
@@ -180,8 +179,8 @@ b. PreProcessing:
 - I tried normalizing & cropping the image
 
 ```sh
-54  model.add(Lambda(lambda x:x/255.0 - 0.5,input_shape=(160,320,3)))   # image normalization
-55  model.add(Cropping2D(cropping=((70,20),(0,0))))                     # cropping the image
+61  model.add(Lambda(lambda x:x/255.0 - 0.5,input_shape=(160,320,3)))   # image normalization
+62  model.add(Cropping2D(cropping=((70,20),(0,0))))                     # cropping the image
 ```
 
 - Then devided the dataset into training & validation dataset
@@ -191,6 +190,6 @@ c. Training the network:
 - Then I trained the network on training dataset for 10 epoch using 'Adam' optimizer. 
 
 ```sh
-80 model.compile(loss='mse',optimizer='adam')
-81 model.fit(x_train,y_train,validation_split=0.2,nb_epoch=10,shuffle=True)  
+87 model.compile(loss='mse',optimizer='adam')
+88 model.fit(x_train,y_train,validation_split=0.2,nb_epoch=10,shuffle=True)  
 ```
